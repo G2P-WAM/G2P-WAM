@@ -1,6 +1,7 @@
-# G2P-WAM
 
-Compact tensor-level reference implementation for review; not a full reproduction package.
+# G2P-WAM
+> **Anonymous Review Version**
+> This compact tensor-level reference implementation is provided solely for double-blind review purposes to demonstrate core module functionality and algorithmic design. It is not a complete reproduction package. All materials herein have been fully anonymized and contain no author or institutional identifying information.
 
 | Module | Scope |
 | --- | --- |
@@ -10,15 +11,14 @@ Compact tensor-level reference implementation for review; not a full reproductio
 | `preferences.py` | Outcome-stratified confidence rank filtering and pair construction |
 | `geodpo.py` | Dual-stream preference loss with a frozen-reference prediction anchor |
 
-Core inputs are caller-supplied tensors. Static targets must already share the
-student token grid; tracks use one common coordinate frame. Explicit group IDs
-define pairing scope, not a guarantee of identical resets. The reference and
-policy predictions are supplied separately. No experiment results are encoded.
+Core inputs are caller-supplied tensors. Static targets must already share the student token grid; tracks use one common coordinate frame. Explicit group IDs define pairing scope, not a guarantee of identical resets. The reference and policy predictions are supplied separately. No experiment results are encoded.
 
 ## CPU checks
-
 With Python 3.10+ and PyTorch installed, from this directory:
-
 ```sh
 python -B -m unittest discover -s tests -v
 ```
+
+## Full Release Upon Acceptance
+Upon acceptance of this paper, we will publicly release the complete set of research artifacts under a permissive open-source license, including full training/inference code, model weights, datasets, evaluation scripts, ablation implementations and visualization tools.
+
