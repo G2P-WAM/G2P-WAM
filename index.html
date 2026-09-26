@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="G2P-WAM connects geometry distillation, policy-relative reward diagnosis, and preference alignment for world-action models.">
+  <meta name="author" content="Anonymous Authors">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#e0dede">
+  <title>G2P-WAM: From Geometry Distillation to Preference Alignment for World-Action Models</title>
+  <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./static/css/style.css">
+  <script src="./static/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hero" id="top">
+  <div class="container">
+    <h1><span class="project-name">G2P-WAM:</span> From Geometry Distillation to Preference Alignment for World-Action Models</h1>
+    <p class="venue">Under review at ICLR 2027</p>
+    <p class="authors">Anonymous Authors</p>
+    <nav class="publication-links" aria-label="Paper resources">
+      <a class="button" href="./static/files/paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg>Paper</a>
+      <a class="button" href="#code"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code</a>
+      <a class="button" href="#simulation-videos"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 4 12 8-12 8z"/></svg>Videos</a>
+      <a class="button" href="#method"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 14h6v6h-6zM14 4h6v6h-6zM7 10v7h7M10 7h4"/></svg>Method</a>
+      <a class="button" href="#experiments"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v17h17M8 15v-4M13 15V6M18 15V9"/></svg>Results</a>
+      <a class="button" href="#real-world"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14v12H5zM12 4v4M9 13h.01M15 13h.01M9 17h6M2 11v6M22 11v6"/></svg>Real-world</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="section" id="key-features" aria-labelledby="key-heading">
+    <div class="container">
+      <h2 id="key-heading">Key Features</h2>
+      <div class="highlights">
+        <a href="#robotwin" class="highlight blue"><strong>92.95<span>%</span></strong><span>RoboTwin 2.0</span><small>Clean / Randomized mean</small></a>
+        <a href="#libero" class="highlight orange"><strong>98.58<span>%</span></strong><span>LIBERO</span><small>Four-suite mean</small></a>
+        <a href="#libero-plus" class="highlight green"><strong>79.5<span>%</span></strong><span>LIBERO-Plus</span><small>Seven-factor mean</small></a>
+        <a href="#real-world" class="highlight charcoal"><strong>2<span> robots</span></strong><span>Physical manipulation</span><small>Six tasks across two platforms</small></a>
+      </div>
+      <div class="prose feature-copy">
+        <p><strong>1. Geometry beyond representation learning.</strong> G2P-WAM connects static 3D and dynamic 4D distillation with preference alignment, allowing geometry to guide both demonstration learning and subsequent policy refinement.</p>
+        <p><strong>2. Outcome-ordered, confidence-filtered preferences.</strong> Policy-relative diagnosis identifies reconstruction confidence as a trajectory-selection signal. Execution outcomes determine which rollouts are preferred.</p>
+        <p><strong>3. The same inference graph.</strong> Geometric teachers, auxiliary heads, and reward scorers are used during post-training. Only the aligned world-action model is deployed.</p>
+      </div>
+      <figure class="paper-figure overview"><a class="figure-link" href="./static/images/overview.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: Overview of geometry distillation, reward diagnosis, and preference alignment"><img src="./static/images/overview.png" alt="Overview of geometry distillation, reward diagnosis, and preference alignment" loading="lazy" decoding="async" width="2000" height="1111"></a><figcaption>Geometry guides both what a world-action model learns from demonstrations and how it improves from its own rollouts.</figcaption></figure>
+    </div>
+  </section>
+  <section class="section soft" id="abstract" aria-labelledby="abstract-heading">
+    <div class="container narrow">
+      <h2 id="abstract-heading">Abstract</h2>
+      <div class="prose"><p>World-action models (WAMs) jointly predict future observations and robot actions, yet visually plausible predictions do not guarantee successful execution. Geometric distillation improves representation grounding, but using geometry for subsequent policy improvement requires relating geometric scores to task outcomes. We propose G2P-WAM, a post-training framework that carries geometric supervision from representation learning into preference alignment. GeoSFT first aligns WAM features with static 3D representations and dynamic 4D trajectories. Reward diagnosis then evaluates candidate geometric scores against execution outcomes and compares their behavior on imagined and observed videos. GeoDPO uses outcomes to order preferences and reconstruction confidence to select trajectories for reference-anchored optimization. Experiments on simulation benchmarks and two physical-robot platforms show that preference alignment further improves the geometrically distilled policy. Joint static and dynamic supervision outperforms either branch alone, while confidence filtering improves on outcome-only preference training with matched pair counts and optimization settings. These results support using geometry for both representation learning and preference selection, without adding geometric teachers or reward scorers at deployment.</p></div>
+    </div>
+  </section>
+  <section class="section" id="method" aria-labelledby="method-heading">
+    <div class="container">
+      <h2 id="method-heading">Method</h2>
+      <p class="section-intro">Two optimization stages connected by policy-relative reward diagnosis.</p>
+      <figure class="paper-figure "><a class="figure-link" href="./static/images/framework.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: G2P-WAM three-stage training framework"><img src="./static/images/framework.png" alt="G2P-WAM three-stage training framework" loading="lazy" decoding="async" width="2000" height="1184"></a><figcaption>GeoSFT grounds the representation; reward diagnosis identifies useful feedback; GeoDPO refines the policy.</figcaption></figure>
+      <div class="stages">
+        <article class="stage blue"><span class="stage-label">Stage I</span><h3>GeoSFT</h3><p>Frozen VGGT features supervise static scene structure, while SpatialTrackerV2 trajectories supervise dynamic correspondence. Training-only readout heads transfer these signals into the WAM.</p></article>
+        <article class="stage orange"><span class="stage-label">Stage II</span><h3>Reward diagnosis</h3><p>Candidate 4RC scores are evaluated on the policy’s own rollouts. Outcome separation and agreement between imagined and observed videos identify mean point confidence as a selection signal.</p></article>
+        <article class="stage green"><span class="stage-label">Stage III</span><h3>GeoDPO</h3><p>Execution outcomes order the preferences. Within each task, confidence selects high-confidence successes and low-confidence failures for optimization against a frozen GeoSFT reference.</p></article>
+      </div>
+      <div class="teacher-videos"><h3>Geometric teacher visualizations</h3><div class="video-grid two-columns"><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/vggt-features.jpg" aria-label="VGGT feature responses">
+    <source src="./static/videos/vggt-features.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/vggt-features.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">Static 3D targets</span><strong>VGGT feature responses</strong><span class="video-note">Sampled features shown at 2 fps.</span></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/spatialtracker-tracks.jpg" aria-label="SpatialTrackerV2 trajectories">
+    <source src="./static/videos/spatialtracker-tracks.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/spatialtracker-tracks.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">Dynamic 4D targets</span><strong>SpatialTrackerV2 trajectories</strong><span class="video-note">Tracks overlaid on the observed RGB clip.</span></figcaption>
+</figure></div></div>
+      <details class="detail"><summary>View static and dynamic teacher targets</summary><figure class="paper-figure "><a class="figure-link" href="./static/images/teacher-targets.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: RGB images, VGGT PCA feature responses, and SpatialTrackerV2 tracks"><img src="./static/images/teacher-targets.png" alt="RGB images, VGGT PCA feature responses, and SpatialTrackerV2 tracks" loading="lazy" decoding="async" width="2037" height="1080"></a><figcaption>Rows, top to bottom: RGB observations, VGGT features (PCA), SpatialTrackerV2 tracks, and WAM action-to-video attention. Columns follow temporal order. PCA is used for display; training aligns the full feature vectors.</figcaption></figure></details>
+      <div class="subsection" id="reward-diagnosis">
+        <h3>Connecting geometric scores to execution outcomes</h3>
+        <figure class="paper-figure "><a class="figure-link" href="./static/images/reward-diagnosis.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: GeoSFT confidence calibration and cross-pool reward diagnosis"><img src="./static/images/reward-diagnosis.png" alt="GeoSFT confidence calibration and cross-pool reward diagnosis" loading="lazy" decoding="async" width="2000" height="690"></a><figcaption>Left: imagined and observed video scores on GeoSFT rollouts. Right: negative-pool sensitivity with official-policy successes held fixed.</figcaption></figure>
+        <div class="prose"><p>On 122 GeoSFT Turn Switch episodes, mean point confidence separates successful and failed executions with AUCs of <strong>0.744 on imagined videos</strong> and <strong>0.752 on observed videos</strong>. The score is used to select trajectories within outcome groups.</p></div>
+        <details class="detail"><summary>View the 4RC confidence visualization</summary><div class="confidence-video"><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/fourrc-confidence.jpg" aria-label="4RC reconstruction confidence">
+    <source src="./static/videos/fourrc-confidence.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/fourrc-confidence.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">Reward diagnosis</span><strong>4RC reconstruction confidence</strong><span class="video-note">Six sampled reconstructions shown at 2 fps. Colors visualize point confidence.</span></figcaption>
+</figure></div></details>
+        <details class="detail"><summary>View the geometry and preference-selection ablations</summary><p>Joint static and dynamic supervision improves over either branch alone. With pair counts and training rules matched, confidence filtering improves mean success by 0.31 percentage points over outcome-only selection.</p><div class="table-scroll" tabindex="0" role="region" aria-label="RoboTwin 2.0 ablations (%)"><table><caption>RoboTwin 2.0 ablations (%)</caption><thead><tr><th scope="col">Configuration</th><th scope="col">Pair selection</th><th scope="col">Mean</th></tr></thead><tbody><tr><th scope="row">Static-only SFT</th><td>None</td><td>92.28</td></tr>
+<tr><th scope="row">Dynamic-only SFT</th><td>None</td><td>92.40</td></tr>
+<tr><th scope="row">GeoSFT</th><td>None</td><td>92.46</td></tr>
+<tr><th scope="row">Outcome-only DPO</th><td>Full outcome pool</td><td>92.67</td></tr>
+<tr><th scope="row">Matched outcome-only DPO</th><td>Random, count-matched</td><td>92.64</td></tr>
+<tr class="ours"><th scope="row">GeoDPO (G2P-WAM)</th><td>Confidence-filtered</td><td>92.95</td></tr>
+</tbody></table></div></details>
+      </div>
+    </div>
+  </section>
+  <section class="section soft" id="experiments" aria-labelledby="experiments-heading">
+    <div class="container">
+      <h2 id="experiments-heading">Experiments</h2>
+      <p class="section-intro">Simulation evaluation across RoboTwin 2.0, LIBERO, and LIBERO-Plus.</p>
+      <article class="benchmark" id="robotwin">
+        <h3>Evaluation on RoboTwin 2.0</h3>
+        <div class="prose"><p>Across 50 tasks, G2P-WAM achieves <strong>93.40% on Clean</strong> and <strong>92.50% on Randomized</strong>, giving a mean of <strong>92.95%</strong>. GeoDPO improves the GeoSFT mean from 92.46% to 92.95%, with 100 trials per task and setting.</p></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="RoboTwin 2.0 success rates (%)"><table><caption>RoboTwin 2.0 success rates (%)</caption><thead><tr><th scope="col">Method</th><th scope="col">Emb. PT.</th><th scope="col">Clean</th><th scope="col">Randomized</th><th scope="col">Mean</th></tr></thead><tbody><tr><th scope="row">π₀</th><td>Yes</td><td>65.92</td><td>58.40</td><td>62.16</td></tr>
+<tr><th scope="row">π₀.₅</th><td>Yes</td><td>82.74</td><td>76.76</td><td>79.75</td></tr>
+<tr><th scope="row">Motus</th><td>Yes</td><td>88.66</td><td>87.02</td><td>87.84</td></tr>
+<tr><th scope="row">LingBot-VA</th><td>Yes</td><td>92.90</td><td>91.50</td><td>92.20</td></tr>
+<tr><th scope="row">Fast-WAM</th><td>No</td><td>91.88</td><td>91.78</td><td>91.83</td></tr>
+<tr><th scope="row">WAM4D</th><td>—</td><td>93.82</td><td>89.86</td><td>91.84</td></tr>
+<tr><th scope="row">MECo-WAM</th><td>No</td><td>93.26</td><td>91.98</td><td>92.62</td></tr>
+<tr><th scope="row">4D-WAM</th><td>No</td><td>91.92</td><td>90.76</td><td>91.34</td></tr>
+<tr class="ours"><th scope="row">G2P-WAM (ours)</th><td>Yes</td><td>93.40</td><td>92.50</td><td>92.95</td></tr>
+</tbody></table></div>
+        <p class="table-note">Success rates (%). Emb. PT.: embodied-policy pretraining. Mean equally weights Clean and Randomized. Baseline scores are from the corresponding original papers.</p>
+      </article>
+      <article class="benchmark" id="libero">
+        <h3>Evaluation on LIBERO</h3>
+        <div class="prose"><p>G2P-WAM reaches <strong>98.58% average success</strong> across the four standard suites, including <strong>99.0% on LIBERO-Long</strong>.</p></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="LIBERO success rates (%)"><table><caption>LIBERO success rates (%)</caption><thead><tr><th scope="col">Method</th><th scope="col">Spatial</th><th scope="col">Object</th><th scope="col">Goal</th><th scope="col">Long</th><th scope="col">Mean</th></tr></thead><tbody><tr><th scope="row">π₀</th><td>96.8</td><td>98.8</td><td>95.8</td><td>85.2</td><td>94.15</td></tr>
+<tr><th scope="row">π₀.₅</th><td>98.8</td><td>98.2</td><td>98.0</td><td>92.4</td><td>96.85</td></tr>
+<tr><th scope="row">OpenVLA-OFT</th><td>97.6</td><td>98.4</td><td>97.9</td><td>94.5</td><td>97.10</td></tr>
+<tr><th scope="row">Motus</th><td>96.8</td><td>99.8</td><td>96.6</td><td>97.6</td><td>97.70</td></tr>
+<tr><th scope="row">LingBot-VA</th><td>98.5</td><td>99.6</td><td>97.2</td><td>98.5</td><td>98.5</td></tr>
+<tr><th scope="row">Fast-WAM</th><td>98.2</td><td>100.0</td><td>97.0</td><td>95.2</td><td>97.60</td></tr>
+<tr><th scope="row">MECo-WAM</th><td>98.8</td><td>100.0</td><td>98.2</td><td>95.8</td><td>98.20</td></tr>
+<tr><th scope="row">4D-WAM</th><td>98.8</td><td>99.5</td><td>98.6</td><td>97.4</td><td>98.6</td></tr>
+<tr class="ours"><th scope="row">G2P-WAM (ours)</th><td>98.5</td><td>99.6</td><td>97.2</td><td>99.0</td><td>98.58</td></tr>
+</tbody></table></div>
+        <p class="table-note">Success rates (%), as reported in the manuscript. Baseline scores are from the corresponding original papers.</p>
+      </article>
+      <article class="benchmark" id="libero-plus">
+        <h3>Evaluation on LIBERO-Plus</h3>
+        <div class="prose"><p>Across seven perturbation factors, preference alignment increases the overall success rate from <strong>76.7% to 79.5%</strong>. The evaluation covers camera, robot, language, lighting, background, noise, and layout changes.</p></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="LIBERO-Plus: before and after preference alignment (%)"><table><caption>LIBERO-Plus: before and after preference alignment (%)</caption><thead><tr><th scope="col">Perturbation factor</th><th scope="col">GeoSFT</th><th scope="col">G2P-WAM</th></tr></thead><tbody><tr><th scope="row">Camera</th><td>29.0</td><td>33.1</td></tr>
+<tr><th scope="row">Robot</th><td>81.3</td><td>82.8</td></tr>
+<tr><th scope="row">Language</th><td>92.0</td><td>92.0</td></tr>
+<tr><th scope="row">Lighting</th><td>87.5</td><td>90.0</td></tr>
+<tr><th scope="row">Background</th><td>71.6</td><td>76.1</td></tr>
+<tr><th scope="row">Noise</th><td>84.1</td><td>86.4</td></tr>
+<tr><th scope="row">Layout</th><td>91.7</td><td>95.8</td></tr>
+<tr class="summary"><th scope="row">Overall</th><td>76.7</td><td>79.5</td></tr>
+</tbody></table></div>
+        <p class="table-note">Success rates (%). Overall equally weights the seven factors.</p>
+      </article>
+      <article class="benchmark" id="simulation-videos">
+        <h3>Simulation rollout videos</h3>
+        <p class="section-intro video-intro">Selected executions, labeled by the source policy checkpoint.</p>
+        <div class="simulation-groups"><div class="simulation-group"><h4>LIBERO</h4><div class="video-stack"><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/libero-moka-pots.jpg" aria-label="Put both moka pots on the stove">
+    <source src="./static/videos/libero-moka-pots.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/libero-moka-pots.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">Base policy</span><strong>Put both moka pots on the stove</strong><span class="video-note">Agent and wrist views.</span></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/libero-cheese-butter.jpg" aria-label="Put cream cheese and butter in the basket">
+    <source src="./static/videos/libero-cheese-butter.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/libero-cheese-butter.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">Base policy</span><strong>Put cream cheese and butter in the basket</strong><span class="video-note">Agent and wrist views.</span></figcaption>
+</figure></div></div><div class="simulation-group"><h4>LIBERO-Plus</h4><div class="video-stack"><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/liberoplus-bowl-drawer.jpg" aria-label="Put the bowl in the drawer and close it">
+    <source src="./static/videos/liberoplus-bowl-drawer.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/liberoplus-bowl-drawer.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">DPO checkpoint</span><strong>Put the bowl in the drawer and close it</strong><span class="video-note">Object-layout variation.</span></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/liberoplus-mug-microwave.jpg" aria-label="Put the mug in the microwave and close it">
+    <source src="./static/videos/liberoplus-mug-microwave.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/liberoplus-mug-microwave.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">DPO checkpoint</span><strong>Put the mug in the microwave and close it</strong><span class="video-note">Lighting variation.</span></figcaption>
+</figure></div></div><div class="simulation-group"><h4>RoboTwin 2.0</h4><div class="video-stack"><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/robotwin-hanging-mug.jpg" aria-label="Hang the mug on the rack">
+    <source src="./static/videos/robotwin-hanging-mug.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/robotwin-hanging-mug.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">GeoSFT</span><strong>Hang the mug on the rack</strong><span class="video-note">High-camera view.</span></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/robotwin-turn-switch.jpg" aria-label="Turn the switch">
+    <source src="./static/videos/robotwin-turn-switch.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/robotwin-turn-switch.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">GeoSFT</span><strong>Turn the switch</strong><span class="video-note">High-camera view.</span></figcaption>
+</figure></div></div></div>
+        <details class="detail"><summary>View the GeoSFT and G2P-WAM keyframe comparison</summary><figure class="paper-figure "><a class="figure-link" href="./static/images/simulation-rollouts.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: GeoSFT and G2P-WAM closed-loop rollouts across three simulation benchmarks"><img src="./static/images/simulation-rollouts.png" alt="GeoSFT and G2P-WAM closed-loop rollouts across three simulation benchmarks" loading="lazy" decoding="async" width="2000" height="538"></a><figcaption>Selected execution sequences on LIBERO, LIBERO-Plus, and RoboTwin. GeoSFT appears above G2P-WAM.</figcaption></figure></details>
+      </article>
+    </div>
+  </section>
+  <section class="section" id="real-world" aria-labelledby="real-heading">
+    <div class="container">
+      <h2 id="real-heading">Real-world Experiments</h2>
+      <p class="section-intro">Representative demonstrations on two physical-robot platforms.<br>Quantitative evaluation uses 30 trials per task and method.</p>
+      <article class="benchmark">
+        <h3>AgileX PiPER X</h3>
+        <div class="prose"><p>The dual-arm robot stores fruit in a drawer, places a plate on a cabinet, and places a banana on the plate. GeoDPO raises mean success from <strong>77.8% to 85.6%</strong>, with improvements on all three tasks.</p></div>
+        <div class="video-grid "><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/piper-fruit-drawer.jpg" aria-label="Store fruit in a drawer">
+    <source src="./static/videos/piper-fruit-drawer.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/piper-fruit-drawer.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">AgileX PiPER X</span><strong>Store fruit in a drawer</strong></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/piper-plate-cabinet.jpg" aria-label="Place a plate on the cabinet">
+    <source src="./static/videos/piper-plate-cabinet.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/piper-plate-cabinet.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">AgileX PiPER X</span><strong>Place a plate on the cabinet</strong></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/piper-banana-plate.jpg" aria-label="Place a banana on the plate">
+    <source src="./static/videos/piper-banana-plate.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/piper-banana-plate.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">AgileX PiPER X</span><strong>Place a banana on the plate</strong></figcaption>
+</figure></div>
+        <figure class="paper-figure "><a class="figure-link" href="./static/images/piper-results.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: AgileX PiPER X task keyframes and success-rate comparisons"><img src="./static/images/piper-results.png" alt="AgileX PiPER X task keyframes and success-rate comparisons" loading="lazy" decoding="async" width="2000" height="701"></a><figcaption>Three PiPER X manipulation tasks and the four-method comparison.</figcaption></figure>
+      </article>
+      <article class="benchmark">
+        <h3>UNT David A1C</h3>
+        <div class="prose"><p>On object handover, object stacking, and drawer opening, mean success improves from <strong>87.8% to 92.2%</strong>. These tasks extend the evaluation to a second robot platform.</p></div>
+        <div class="video-grid "><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/a1c-handover.jpg" aria-label="Bimanual object handover">
+    <source src="./static/videos/a1c-handover.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/a1c-handover.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">UNT David A1C</span><strong>Bimanual object handover</strong></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/a1c-stacking.jpg" aria-label="Object stacking">
+    <source src="./static/videos/a1c-stacking.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/a1c-stacking.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">UNT David A1C</span><strong>Object stacking</strong></figcaption>
+</figure><figure class="video-card">
+  <video controls muted playsinline loop preload="none" poster="./static/videos/posters/a1c-drawer.jpg" aria-label="Drawer opening">
+    <source src="./static/videos/a1c-drawer.mp4" type="video/mp4">
+    Your browser does not support embedded video. <a href="./static/videos/a1c-drawer.mp4">Open the video</a>.
+  </video>
+  <figcaption><span class="video-badge">UNT David A1C</span><strong>Drawer opening</strong></figcaption>
+</figure></div>
+        <figure class="paper-figure a1c-figure"><a class="figure-link" href="./static/images/a1c-rollouts.png" target="_blank" rel="noopener" data-zoom aria-label="Enlarge: UNT David A1C execution sequences for handover, stacking, and drawer opening"><img src="./static/images/a1c-rollouts.png" alt="UNT David A1C execution sequences for handover, stacking, and drawer opening" loading="lazy" decoding="async" width="1400" height="1167"></a><figcaption>Representative keyframes for object handover, object stacking, and drawer opening.</figcaption></figure>
+      </article>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Physical-robot mean success rates (%)"><table><caption>Physical-robot mean success rates (%)</caption><thead><tr><th scope="col">Method</th><th scope="col">AgileX PiPER X</th><th scope="col">UNT David A1C</th></tr></thead><tbody><tr><th scope="row">π₀.₅</th><td>60.0</td><td>77.8</td></tr>
+<tr><th scope="row">LingBot-VA</th><td>73.3</td><td>82.2</td></tr>
+<tr><th scope="row">GeoSFT</th><td>77.8</td><td>87.8</td></tr>
+<tr class="ours"><th scope="row">G2P-WAM (ours)</th><td>85.6</td><td>92.2</td></tr>
+</tbody></table></div>
+      <p class="table-note">Mean success rates (%). Each platform is evaluated on three tasks, with 30 trials per task and method.</p>
+    </div>
+  </section>
+  <section class="section soft" id="code" aria-labelledby="code-heading">
+    <div class="container narrow">
+      <h2 id="code-heading">Reference Code</h2>
+      <div class="prose"><p>The reference implementation provides tensor-level components for GeoSFT, geometric score diagnosis, confidence-filtered preference construction, and GeoDPO. The modules operate on caller-supplied teacher targets and policy predictions.</p></div>
+      <div class="code-download"><a class="button" href="./static/files/g2p-wam-reference.zip" download>Download Reference Code</a><a class="code-readme" href="./code/README.md">Implementation README</a></div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p><strong>G2P-WAM</strong> · Anonymous project page</p>
+    <p><a href="./static/files/paper.pdf" target="_blank" rel="noopener">Read the paper</a><span class="separator">·</span><a href="#top">Back to top</a></p>
+    <p class="credit">Page layout inspired by <a href="https://spatial-forcing.github.io/" target="_blank" rel="noopener noreferrer">Spatial Forcing</a>.</p>
+  </div>
+</footer>
+<dialog id="figure-dialog" aria-label="Enlarged paper figure">
+  <button class="dialog-close" type="button" aria-label="Close enlarged figure">×</button>
+  <img id="dialog-image" alt="">
+  <p id="dialog-caption"></p>
+</dialog>
+</body>
+</html>
